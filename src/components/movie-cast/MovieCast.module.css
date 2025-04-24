@@ -1,0 +1,13 @@
+.actors {
+  padding: 15px 0 0 30px;
+}
+
+.actorImage {
+  width: 70px;
+  object-fit: cover;
+  padding-bottom: 10px;
+}
+
+.actorText {
+  padding-bottom: 12px;
+}

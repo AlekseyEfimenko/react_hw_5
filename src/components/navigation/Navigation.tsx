@@ -8,14 +8,14 @@ const linkClass = ({ isActive }: NavLinkRenderProps) => {
 
 const Navigation = () => {
   return (
-    <nav>
-        <NavLink to="/" className={linkClass}>
-          Home
-        </NavLink>
-        <NavLink to="/movies" className={linkClass}>
-          Movies
-        </NavLink>
-      </nav>
+    <nav className={css.navbar}>
+      <NavLink to="/" className={linkClass}>
+        Home
+      </NavLink>
+      <NavLink to="/movies" className={linkClass}>
+        Movies
+      </NavLink>
+    </nav>
   )
 }
 

@@ -1,0 +1,26 @@
+.descriptionContainer {
+  display: flex;
+  gap: 10px;
+  padding-bottom: 6px;
+  box-shadow: 0 1px 2px #333;
+}
+
+.descriptionImage {
+  width: 200px;
+  object-fit: cover;
+}
+
+.description {
+  padding-top: 25px;
+}
+
+.descriptionText,
+h3,
+h4 {
+  margin-top: 10px;
+}
+
+.additionalInfoList {
+  padding: 10px 0 6px 20px;
+  box-shadow: 0 1px 2px #333;
+}
