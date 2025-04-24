@@ -7,16 +7,9 @@ import MovieCast from "../../components/movie-cast/MovieCast";
 import MovieReviews from "../../components/movie-reviews/MovieReviews";
 
 const MovieDetailsPage = () => {
-  const [movieDetail, setMovieDetail] = useState<MovieDetails>({});
+  const [movieDetail, setMovieDetail] = useState<MovieDetails | null>(null);
   const [informationType, setInformationType] = useState("");
   const { movieId } = useParams();
-
-  const { poster_path, title, release_date, vote_average, overview, genres } = movieDetail;
-
-  const posterUrl = 'https://image.tmdb.org/t/p/original' + poster_path;
-  const yearRelease = release_date && release_date.split('-')[0];
-  const filmGenres = genres && genres.map(genre => genre.name).join(" ");
-  const userScore = vote_average && (vote_average * 10).toFixed(2);
 
   useEffect(() => {
     const getMovies = async (id: string) => {
@@ -30,6 +23,17 @@ const MovieDetailsPage = () => {
       getMovies(movieId);
     }
   }, [movieId])
+
+  if (!movieDetail) {
+    return <div>Loadding...</div>
+  }
+
+  const { poster_path, title, release_date, vote_average, overview, genres } = movieDetail;
+
+  const posterUrl = 'https://image.tmdb.org/t/p/original' + poster_path;
+  const yearRelease = release_date && release_date.split('-')[0];
+  const filmGenres = genres && genres.map(genre => genre.name).join(" ");
+  const userScore = vote_average && (vote_average * 10).toFixed(2);
 
   const handleClick = (type: string) => {
     setInformationType(type);

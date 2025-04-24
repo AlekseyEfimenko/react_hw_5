@@ -27,7 +27,7 @@ const MovieCast = () => {
         const actorImage = 'https://image.tmdb.org/t/p/original' + profile_path;
 
         return (
-          <li>
+          <li key={name}>
             <img alt={name} src={actorImage} className={css.actorImage} />
             <p className={css.actorText}>
               {name}
