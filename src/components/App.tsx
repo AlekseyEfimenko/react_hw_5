@@ -1,9 +1,10 @@
 import Navigation from "./navigation/Navigation";
-import MovieDetailsPage from "../pages/movie-details-page/MovieDetailsPage";
 import { Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 
 const HomePage = lazy(() => import('../pages/home-page/HomePage'));
+const MovieDetailsPage = lazy(() => import('../pages/movie-details-page/MovieDetailsPage'));
+const MoviesPage = lazy(() => import('../pages/movies-page/MoviesPage'));
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
             <Route path="cast" element={<MovieDetailsPage />} />
             <Route path="reviews" element={<MovieDetailsPage />} />
           </Route>
+          <Route path="/movies" element={<MoviesPage />}></Route>
         </Routes>
       </Suspense>
     </>

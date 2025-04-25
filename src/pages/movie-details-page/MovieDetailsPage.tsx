@@ -1,23 +1,24 @@
 import { useEffect, useState } from "react";
 import { getMovieDetails } from "../../movie-api";
 import { MovieDetails } from "../../types";
-import { useParams, NavLink } from "react-router-dom";
+import { useParams, NavLink, useLocation, Link } from "react-router-dom";
 import css from './MovieDetailsPage.module.css';
 import MovieCast from "../../components/movie-cast/MovieCast";
 import MovieReviews from "../../components/movie-reviews/MovieReviews";
+import { IoIosArrowRoundBack } from "react-icons/io";
 
 const MovieDetailsPage = () => {
   const [movieDetail, setMovieDetail] = useState<MovieDetails | null>(null);
   const [informationType, setInformationType] = useState("");
   const { movieId } = useParams();
+  const location = useLocation();
+  const backHref = location.state ?? '/';
 
   useEffect(() => {
     const getMovies = async (id: string) => {
       const result: MovieDetails = await getMovieDetails(id);
-      console.log(result);
       setMovieDetail(result);
     }
-    console.log(movieId)
 
     if (movieId) {
       getMovies(movieId);
@@ -41,6 +42,10 @@ const MovieDetailsPage = () => {
 
   return (
     <>
+      <div className={css.buttonWrapper}>
+        <Link to={backHref} className={css.button}>Go back</Link>
+        <IoIosArrowRoundBack className={css.buttonIcon} />
+      </div>
       <div className={css.descriptionContainer}>
         <img alt={title} src={posterUrl} className={css.descriptionImage} />
         <div className={css.description}>

@@ -18,3 +18,8 @@ export const getMovieCredits = async (id: string) => {
   const response = axios.get(`/3/movie/${id}/credits`);
   return (await response).data.cast;
 }
+
+export const getMovieReviews = async (id: string) => {
+  const response = axios.get(`/3/movie/${id}/reviews`);
+  return (await response).data.results;
+}

@@ -11,7 +11,6 @@ const MovieCast = () => {
   useEffect(() => {
     const getCast = async (id: string) => {
       const response: Actor[] = await getMovieCredits(id);
-      console.log(response);
       setActors(response);
     }
 

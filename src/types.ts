@@ -23,3 +23,9 @@ export interface Actor {
   name: string;
   profile_path: string;
 }
+
+export interface Review {
+  author: string;
+  content: string;
+  id: string;
+}

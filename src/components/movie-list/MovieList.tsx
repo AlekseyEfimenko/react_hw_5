@@ -17,7 +17,7 @@ const MovieList: React.FC<Props> = (props) => {
 
         return (
           <li className={css.movieListItem} key={movie.id}>
-            <NavLink to={movieLink}>{movie.title}</NavLink>    
+            <NavLink to={movieLink} state='/'>{movie.title}</NavLink>    
           </li>
         )
       })}
