@@ -23,3 +23,13 @@ export const getMovieReviews = async (id: string) => {
   const response = axios.get(`/3/movie/${id}/reviews`);
   return (await response).data.results;
 }
+
+export const searchMovie = async (name: string, page: number) => {
+  const response = (await axios.get('/3/search/movie', {
+    params: {
+      query: name,
+      page: page
+    }
+  }));
+  return response.data;
+}

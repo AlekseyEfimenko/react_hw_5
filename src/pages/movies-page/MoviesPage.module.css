@@ -1,0 +1,17 @@
+.searchWrapper {
+  padding-top: 15px;
+}
+
+.searchField {
+  min-width: 300px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.searchField:focus {
+  border: 3px solid #60cbe6;
+}
+
+.searchButton {
+  cursor: pointer;
+}

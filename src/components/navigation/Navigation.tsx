@@ -7,12 +7,16 @@ const linkClass = ({ isActive }: NavLinkRenderProps) => {
 }
 
 const Navigation = () => {
+  const handleClick = () => {
+    window.localStorage.clear();
+  }
+
   return (
     <nav className={css.navbar}>
-      <NavLink to="/" className={linkClass}>
+      <NavLink to="/" className={linkClass} onClick={handleClick}>
         Home
       </NavLink>
-      <NavLink to="/movies" className={linkClass}>
+      <NavLink to="/movies" className={linkClass} onClick={handleClick}>
         Movies
       </NavLink>
     </nav>

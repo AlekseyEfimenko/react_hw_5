@@ -1,7 +1,7 @@
 import React from "react";
 import { Movie } from "../../types";
 import css from './MovieList.module.css';
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 type Props = {
   movies: Movie[]
@@ -9,6 +9,7 @@ type Props = {
 
 const MovieList: React.FC<Props> = (props) => {
   const { movies } = props;
+  const location = useLocation();
 
   return (
     <ul className={css.movieList}>
@@ -17,7 +18,7 @@ const MovieList: React.FC<Props> = (props) => {
 
         return (
           <li className={css.movieListItem} key={movie.id}>
-            <NavLink to={movieLink} state='/'>{movie.title}</NavLink>    
+            <NavLink to={movieLink} state={location}>{movie.title}</NavLink>    
           </li>
         )
       })}
