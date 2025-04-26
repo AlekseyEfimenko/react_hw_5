@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getMovieDetails } from "../../movie-api";
 import { MovieDetails } from "../../types";
 import { useParams, NavLink, useLocation, Link } from "react-router-dom";
@@ -12,7 +12,7 @@ const MovieDetailsPage = () => {
   const [informationType, setInformationType] = useState("");
   const { movieId } = useParams();
   const location = useLocation();
-  const backHref = location.state ?? '/';
+  const backHref = useRef(location);
 
   useEffect(() => {
     const getMovies = async (id: string) => {
@@ -43,7 +43,7 @@ const MovieDetailsPage = () => {
   return (
     <>
       <div className={css.buttonWrapper}>
-        <Link to={backHref} className={css.button}>Go back</Link>
+        <Link to={backHref.current.state} className={css.button}>Go back</Link>
         <IoIosArrowRoundBack className={css.buttonIcon} />
       </div>
       <div className={css.descriptionContainer}>
@@ -71,12 +71,18 @@ const MovieDetailsPage = () => {
         </p>
         <ul className={css.additionalInfoList}>
           <li>
-            <NavLink to={`/movie/${movieId}/cast`} onClick={() => handleClick('cast')}>
+            <NavLink
+              to={`/movie/${movieId}/cast`}
+              onClick={() => handleClick('cast')}
+            >
               Cast
             </NavLink>
           </li>
           <li>
-            <NavLink to={`/movie/${movieId}/reviews`} onClick={() => handleClick('reviews')}>
+            <NavLink
+              to={`/movie/${movieId}/reviews`}
+              onClick={() => handleClick('reviews')}
+            >
               Reviews
             </NavLink>
           </li>
