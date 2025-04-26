@@ -3,6 +3,7 @@ import css from './MoviesPage.module.css';
 import { Movie } from '../../types';
 import MovieList from '../../components/movie-list/MovieList';
 import { searchMovie } from '../../movie-api';
+import { useSearchParams } from 'react-router-dom';
 
 const MoviesPage = () => {
   const [movies, setMovies] = useState(() => {
@@ -19,6 +20,7 @@ const MoviesPage = () => {
       ? ''
       : JSON.parse(data);
   });
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     window.localStorage.setItem('query', JSON.stringify(searchValue));
@@ -27,6 +29,12 @@ const MoviesPage = () => {
   useEffect(() => {
     window.localStorage.setItem('movies', JSON.stringify(movies));
   }, [movies])
+
+  const updateSearchParams = (key: string, value: string) => {
+    const params = new URLSearchParams(searchParams);
+    params.set(key, value);
+    setSearchParams(params);
+  }
 
   const handleSubmit = async (evt: BaseSyntheticEvent) => {
     evt.preventDefault();
@@ -37,6 +45,7 @@ const MoviesPage = () => {
     const response = await searchMovie(searchFilm, 1);
     setTotalPages(response.total_pages);
     setMovies(response.results);
+    updateSearchParams('query', searchFilm);
     
     form.reset();
   }
@@ -50,12 +59,26 @@ const MoviesPage = () => {
   return (
     <>
       <form className={css.searchWrapper} onSubmit={handleSubmit}>
-        <input type='text' name='search' className={css.searchField} required/>
-        <button type='submit' className={css.searchButton}>Search</button>
+        <input
+          type='text'
+          name='search'
+          className={css.searchField}
+          required
+        />
+        <button
+          type='submit'
+          className={css.searchButton}
+        >
+          Search
+        </button>
       </form>
       <MovieList movies={movies} />
       {movies.length > 0 && requestedPage <= totalPages &&
-        <button type='button' onClick={handleLoadMore} className={css.loadMoreBtn}>
+        <button
+          type='button'
+          onClick={handleLoadMore}
+          className={css.loadMoreBtn}
+        >
           Load more
         </button>
       }
